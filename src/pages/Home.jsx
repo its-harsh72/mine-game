@@ -393,55 +393,53 @@ const getTileContent = (index) => {
 
 
         {/* RIGHT ICON GROUP */}
-        <div className="flex items-center gap-4">
-                    {/* SCREEN MODE TOGGLE */}
-                        
-                    <button
-                    onClick={() => setScreenMode("normal")}
-                    className="p-2 rounded-lg  cursor-pointer"
-                    >
-                    <Monitor
-                        size={22}
-                        className={`${screenMode === "normal" ? "text-green-500" : "text-gray-400"} transition`}
-                    />
-                    </button>
+<div className="flex flex-wrap items-center gap-4 sm:gap-2 md:gap-4">
+  {/* SCREEN MODE TOGGLE */}
+  <button
+    onClick={() => setScreenMode("normal")}
+    className="p-2 rounded-lg cursor-pointer"
+  >
+    <Monitor
+      size={22}
+      className={`${screenMode === "normal" ? "text-green-500" : "text-gray-400"} transition`}
+    />
+  </button>
 
+  <button
+    onClick={() => setScreenMode("movie")}
+    className="p-2 rounded-lg cursor-pointer"
+  >
+    <Film
+      size={22}
+      className={`${screenMode === "movie" ? "text-green-500" : "text-gray-400"} transition`}
+    />
+  </button>
 
-                <button
-                onClick={() => setScreenMode("movie")}
-                className="p-2 rounded-lg cursor-pointer"
-                >
-                <Film
-                    size={22}
-                    className={`${screenMode === "movie" ? "text-green-500" : "text-gray-400"} transition`}
-                />
-                </button>
+  <button
+    onClick={() => setScreenMode("float")}
+    className="p-2 rounded-lg cursor-pointer"
+  >
+    <Move
+      size={22}
+      className={`${screenMode === "float" ? "text-green-500" : "text-gray-400"} transition`}
+    />
+  </button>
 
+  <button
+    onClick={() => setIsSfxEnabled(!isSfxEnabled)}
+    className="text-gray-400 hover:text-white transition text-xl cursor-pointer"
+  >
+    {isSfxEnabled ? <Volume2 size={22} className="text-green-500"/> : <Volume2 size={22}/>}
+  </button>
 
-                <button
-                onClick={() => setScreenMode("float")}
-                className="p-2 rounded-lg cursor-pointer"
-                >
-                <Move
-                    size={22}
-                    className={`${screenMode === "float" ? "text-green-500" : "text-gray-400"} transition`}
-                />
-                </button>
+  <button
+    onClick={() => setIsMusicPlaying(!isMusicPlaying)}
+    className="text-gray-400 hover:text-white transition text-xl cursor-pointer"
+  >
+    {isMusicPlaying ? <Music size={22} className="text-green-500"/> : <Music size={22}/>}
+  </button>
 
-
-          <button
-            onClick={() => setIsSfxEnabled(!isSfxEnabled)}
-            className="text-gray-400 hover:text-white transition text-xl cursor-pointer"
-          >
-            {isSfxEnabled ? <Volume2 size={22} className="text-green-500"/> : <Volume2 size={22}/>}
-          </button>
-          <button
-            onClick={() => setIsMusicPlaying(!isMusicPlaying)}
-            className="text-gray-400 hover:text-white transition text-xl"
-          >
-            {isMusicPlaying ? <Music size={22} className="text-green-500"/> : <Music size={22}/>}
-          </button>
-<div className="relative group">
+  <div className="relative group">
     <button className="p-2 rounded-lg bg-gray-700 text-gray-400 hover:bg-gray-600 transition">
       <CircleQuestionMark size={22} />
     </button>
@@ -451,8 +449,8 @@ const getTileContent = (index) => {
       Music toggle | SFX toggle | Normal | Movie | Float
     </div>
   </div>
-    
-        </div>
+</div>
+
       </div>
     </div>
     </GameScreenModeWrapper>

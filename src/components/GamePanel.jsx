@@ -13,7 +13,7 @@ export default function GamePanel({ state, getTileContent, revealTile }) {
       }}
     >
       
-<div className="backdrop-blur-sm px-6 py-3 flex justify-center gap-2 flex-row-reverse">
+<div className="backdrop-blur-sm px-4 py-3 flex flex-row-reverse gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-900">
   {(state.history || []).map((h, i) => {
     const isWin = h !== "0x";  // ✅ any value except 0x = win
 
@@ -33,6 +33,7 @@ export default function GamePanel({ state, getTileContent, revealTile }) {
     );
   })}
 </div>
+
 
 
       {/* Game Grid */}
