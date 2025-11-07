@@ -339,7 +339,7 @@ const getTileContent = (index) => {
     >
       {/* MAIN WRAPPER */}
       <div
-        className="flex flex-col lg:flex-row gap-8 p-6 max-w-7xl mx-auto"
+        className="flex flex-col lg:flex-row gap-8 p-6 w-full"
         style={{ backgroundColor: "#323738" }}
       >
         {/* LEFT SIDEBAR */}
@@ -375,7 +375,7 @@ const getTileContent = (index) => {
       {/* FOOTER BAR (floats inside, spans both panels) */}
 
       <div
-        className="flex items-center justify-between px-8 py-3  mx-auto max-w-7xl rounded-t-lg"
+        className="flex items-center justify-between px-8 py-3  mx-auto w-full rounded-t-lg"
         style={{ backgroundColor: "#2e3333" }}
       >
 
