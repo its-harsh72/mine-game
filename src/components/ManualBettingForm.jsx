@@ -1,4 +1,4 @@
-import { Info } from 'lucide-react';
+import { Info, WandSparkles } from 'lucide-react';
 
 // Added 'active', 'cashOut', and 'pickRandomTile' to props
 export default function ManualBettingForm({ state,amount, setAmount, mines, setMines, handleBet, active, cashOut, pickRandomTile }) {
@@ -157,7 +157,7 @@ export default function ManualBettingForm({ state,amount, setAmount, mines, setM
               onClick={pickRandomTile}
               className="w-full cursor-pointer bg-[#34373c] text-slate-200 font-bold text-base py-3 rounded-lg hover:bg-[#43464c] transition-all mb-2 flex items-center justify-center gap-2"
             >
-              <span role="img" aria-label="pickaxe">⛏️</span> Pick a Tile Randomly
+              <span role="img" aria-label="pickaxe"><WandSparkles /></span> Pick a Tile Randomly
             </button>
 
             {/* Cash Out Button - Orange/Gold gradient */}
