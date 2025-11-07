@@ -2,7 +2,6 @@ import { useState } from "react"
 import {
   Star,
   Heart,
-  Share2,
   Copy,
   MessageCircle,
   Send,
@@ -44,13 +43,13 @@ export default function FooterIcons() {
       {/* ⭐ Favorite toggle */}
       <button
         onClick={handleFavToggle}
-        className="flex items-center gap-2 transition"
+        className="flex items-center gap-2 transition cursor-pointer"
       >
         <Star
           size={22}
           fill={isFav ? "#facc15" : "none"}
           stroke={isFav ? "#facc15" : "currentColor"}
-          className="text-gray-300 hover:text-yellow-400 transition-colors"
+          className="text-gray-300 hover:text-yellow-400 transition-colors "
         />
         <span className="text-gray-300">{favCount}</span>
       </button>
@@ -58,7 +57,7 @@ export default function FooterIcons() {
       {/* ❤️ Like toggle */}
       <button
         onClick={handleLikeToggle}
-        className="flex items-center gap-2 transition"
+        className="flex items-center gap-2 transition cursor-pointer"
       >
         <Heart
           size={22}
@@ -71,7 +70,7 @@ export default function FooterIcons() {
 
       {/* 📤 Share popup */}
       <div className="relative">
-      <SharePopup />
+      <SharePopup className="cursor-pointer" />
 
         {/* Share menu popup */}
         {showShare && (
@@ -85,7 +84,7 @@ export default function FooterIcons() {
 
             <button
               onClick={handleCopyLink}
-              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md"
+              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md cursor-pointer"
             >
               <Copy size={16} />
               Copy Link
@@ -93,7 +92,7 @@ export default function FooterIcons() {
 
             <button
               onClick={() => handleComingSoon("WhatsApp")}
-              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md"
+              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md cursor-pointer"
             >
               <MessageCircle size={16} />
               WhatsApp
@@ -101,7 +100,7 @@ export default function FooterIcons() {
 
             <button
               onClick={() => handleComingSoon("Telegram")}
-              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md"
+              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md cursor-pointer"
             >
               <Send size={16} />
               Telegram
@@ -109,7 +108,7 @@ export default function FooterIcons() {
 
             <button
               onClick={() => handleComingSoon("Instagram")}
-              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md"
+              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md cursor-pointer"
             >
               <Instagram size={16} />
               Instagram
@@ -117,7 +116,7 @@ export default function FooterIcons() {
 
             <button
               onClick={() => handleComingSoon("Mail")}
-              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md"
+              className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-300 hover:bg-gray-700 rounded-md cursor-pointer "
             >
               <Mail size={16} />
               Mail

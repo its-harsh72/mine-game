@@ -1,5 +1,5 @@
-import ManualBettingForm from "./ManualBettingForm"
-import AutoBettingForm from "./AutoBettingForm"
+import ManualBettingForm from "./ManualBettingForm";
+import AutoBettingForm from "./AutoBettingForm";
 
 export default function ControlsPanel({
   state,
@@ -13,19 +13,20 @@ export default function ControlsPanel({
   handleBet,
   cashOut,
   pickRandomTile,
-  isAutoBettingActive, 
+  isAutoBettingActive,
   handleStartAutoBet,
 }) {
   return (
     <div className="w-full order-first lg:order-last">
       <div className="space-y-5">
-        {/* 🧭 Mode Tabs */}
+
+        {/* ✅ Mode Tabs (Manual / Auto) */}
         <div className="flex w-full border-b border-slate-700/50 relative">
           {["manual", "auto"].map((mode) => (
             <button
               key={mode}
-              onClick={() => setState((prev) => ({ ...prev, mode }))}
-              className={`w-1/2 text-center pb-3 transition-all font-semibold text-sm relative
+              onClick={() => setState((prev) => ({ ...prev, mode }))} // ✅ Switch game mode
+              className={`w-1/2 text-center pb-3 transition-all font-semibold text-sm relative cursor-pointer
                 ${
                   state.mode === mode
                     ? "text-white"
@@ -35,48 +36,44 @@ export default function ControlsPanel({
             >
               {mode === "manual" ? "Manual" : "Auto"}
 
-              {/* 🌈 Gradient underline when active */}
+              {/* ✅ Active tab underline with gradient */}
               {state.mode === mode && (
                 <span
                   className="absolute bottom-0 left-0 w-full h-[3px] rounded-full
-                   bg-linear-to-r from-[#27ee89] to-[#89e976]
-                    shadow-[0_0_8px_rgba(56,189,248,0.6)]
-                  "
+                    bg-linear-to-r from-[#27ee89] to-[#89e976]
+                    shadow-[0_0_8px_rgba(56,189,248,0.6)]"
                 ></span>
               )}
             </button>
           ))}
         </div>
 
-        {/* ⚙️ Mode-based form */}
+        {/*  Mode-based Form Rendering */}
         {state.mode === "manual" ? (
           <ManualBettingForm
-            amount={amount}
+            amount={amount}                  // ✅ Bet amount
             setAmount={setAmount}
-            mines={mines}
+            mines={mines}                    // ✅ Mines count
             setMines={setMines}
-            handleBet={handleBet}
-            active={state.gameActive} // 👈 game active or not
+            handleBet={handleBet}            // ✅ Start bet button
+            active={state.gameActive}        // ✅ Blocks bet when game active
             state={state}
-            pickRandomTile={pickRandomTile}
-            cashOut={cashOut}
+            pickRandomTile={pickRandomTile}  // ✅ Random tile picker
+            cashOut={cashOut}                // ✅ Cashout function
           />
         ) : (
-        <AutoBettingForm
-                      // Betting parameters
-                      amount={amount}
-                      setAmount={setAmount}
-                      mines={mines}
-                      setMines={setMines}
-                      // Auto settings
-                      autoSettings={autoSettings}
-                      setAutoSettings={setAutoSettings}
-                      // Control functions and state
-                      handleStartAutoBet={handleStartAutoBet}
-                      isAutoBettingActive={isAutoBettingActive} // 👈 Auto active state (disables inputs)
-        />
+          <AutoBettingForm
+            amount={amount}                       // ✅ Bet amount
+            setAmount={setAmount}
+            mines={mines}                         // ✅ Mines count
+            setMines={setMines}
+            autoSettings={autoSettings}           // ✅ Auto configuration
+            setAutoSettings={setAutoSettings}
+            handleStartAutoBet={handleStartAutoBet} // ✅ Start/stop auto mode
+            isAutoBettingActive={isAutoBettingActive} // ✅ Disables UI when running
+          />
         )}
-      </div>  
+      </div>
     </div>
-  )
+  );
 }

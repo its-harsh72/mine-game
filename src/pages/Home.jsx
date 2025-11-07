@@ -5,9 +5,10 @@ import PurpleDiamond from "../components/PurpleDiamond"
 import BombIcon from "../components/BombIcon"
 import FooterIcons from "../components/FooterIcons"
 import gameSound from "../assets/Game_S.mp3"
-import { Music, Volume2 } from "lucide-react"
+import { Music, Volume2,Monitor, Film, Move,CircleQuestionMark } from "lucide-react"
 import mineSound from "../assets/Mine.mp3"
 import blastSound from "../assets/Blast.mp3"
+import GameScreenModeWrapper from "../components/GameScreenModeWrapper";
 // ============================================================================
 // GAME STATE & TYPES
 // ============================================================================
@@ -44,7 +45,7 @@ useEffect(() => {
 
 // near the top of Home component
 const lastSavedRef = useRef(null);
-
+const [screenMode, setScreenMode] = useState("normal");
 const saveHistory = useCallback((value) => {
   try {
     const prev = JSON.parse(localStorage.getItem("history")) || [];
@@ -269,6 +270,21 @@ saveHistory("0x");
     }))
   }, [])
 
+
+  useEffect(() => {
+  const handleUserInteraction = () => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5
+      audioRef.current.play().catch(() => {})
+      setIsMusicPlaying(true)
+    }
+    document.removeEventListener("click", handleUserInteraction)
+  }
+
+  document.addEventListener("click", handleUserInteraction)
+  return () => document.removeEventListener("click", handleUserInteraction)
+}, [])
+
   const pickRandomTile = useCallback(() => {
     if (!state.gameActive) return
 
@@ -316,7 +332,7 @@ const getTileContent = (index) => {
   }}
     >
       {/* Multiplier/History Bar (kept in Home as it uses currentMultiplier from state) */}
-
+  <GameScreenModeWrapper mode={screenMode} setMode={setScreenMode}>
  <div
       className="min-h-screen text-white relative overflow-hidden"
       style={{ backgroundColor: "#232626" }}
@@ -345,35 +361,77 @@ const getTileContent = (index) => {
 
         {/* RIGHT FLEX PANEL */}
         <div className="flex-1">
+          
           <GamePanel
             state={state}
             getTileContent={getTileContent}
             revealTile={revealTile}
             TOTAL_TILES={TOTAL_TILES}
           />
+       
         </div>
       </div>
 
       {/* FOOTER BAR (floats inside, spans both panels) */}
+
       <div
         className="flex items-center justify-between px-8 py-3  mx-auto max-w-7xl rounded-t-lg"
         style={{ backgroundColor: "#2e3333" }}
       >
+
+
         {/* LEFT ICON GROUP */}
+
+
         <div className="flex items-center gap-6">
           <FooterIcons/>
         </div>
       <audio ref={audioRef} src={gameSound} loop />
       <audio ref={mineAudioRef} src={mineSound} />
       <audio ref={blastAudioRef} src={blastSound} />
+
+
+
         {/* RIGHT ICON GROUP */}
         <div className="flex items-center gap-4">
-          <button className="text-gray-400 hover:text-white transition text-xl">📁</button>
-          <button className="text-gray-400 hover:text-white transition text-xl">🔗</button>
-          <button className="text-gray-400 hover:text-white transition text-xl">📊</button>
+                    {/* SCREEN MODE TOGGLE */}
+                        
+                    <button
+                    onClick={() => setScreenMode("normal")}
+                    className="p-2 rounded-lg  cursor-pointer"
+                    >
+                    <Monitor
+                        size={22}
+                        className={`${screenMode === "normal" ? "text-green-500" : "text-gray-400"} transition`}
+                    />
+                    </button>
+
+
+                <button
+                onClick={() => setScreenMode("movie")}
+                className="p-2 rounded-lg cursor-pointer"
+                >
+                <Film
+                    size={22}
+                    className={`${screenMode === "movie" ? "text-green-500" : "text-gray-400"} transition`}
+                />
+                </button>
+
+
+                <button
+                onClick={() => setScreenMode("float")}
+                className="p-2 rounded-lg cursor-pointer"
+                >
+                <Move
+                    size={22}
+                    className={`${screenMode === "float" ? "text-green-500" : "text-gray-400"} transition`}
+                />
+                </button>
+
+
           <button
             onClick={() => setIsSfxEnabled(!isSfxEnabled)}
-            className="text-gray-400 hover:text-white transition text-xl"
+            className="text-gray-400 hover:text-white transition text-xl cursor-pointer"
           >
             {isSfxEnabled ? <Volume2 size={22} className="text-green-500"/> : <Volume2 size={22}/>}
           </button>
@@ -383,16 +441,21 @@ const getTileContent = (index) => {
           >
             {isMusicPlaying ? <Music size={22} className="text-green-500"/> : <Music size={22}/>}
           </button>
-          <button className="text-gray-400 hover:text-white transition text-xl">📋</button>
-          <button className="text-gray-400 hover:text-white transition text-xl">≈</button>
-          <button className="text-gray-400 hover:text-white transition text-xl">🗑️</button>
-          <button className="text-gray-400 hover:text-white transition text-xl">❓</button>
-          <button className="bg-emerald-500 hover:bg-emerald-600 text-black p-2 rounded-lg font-bold">
-            🎧
-          </button>
+<div className="relative group">
+    <button className="p-2 rounded-lg bg-gray-700 text-gray-400 hover:bg-gray-600 transition">
+      <CircleQuestionMark size={22} />
+    </button>
+
+    {/* Tooltip */}
+    <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 w-44 text-sm text-black bg-white rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity z-50">
+      Music toggle | SFX toggle | Normal | Movie | Float
+    </div>
+  </div>
+    
         </div>
       </div>
     </div>
+    </GameScreenModeWrapper>
     </div>
   )
 }

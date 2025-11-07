@@ -10,7 +10,7 @@ export default function BombIcon({ width = 80, height = 80, blasting = false }) 
         margin: "0 auto",
       }}
     >
-      {/* 🔥 FLASH ANIMATION WHEN BLASTING */}
+      {/* Flash animation that plays whenever the bomb explodes */}
       {blasting && (
         <circle cx="70" cy="90" r="5" fill="yellow">
           <animate
@@ -30,15 +30,15 @@ export default function BombIcon({ width = 80, height = 80, blasting = false }) 
         </circle>
       )}
 
-      {/* Glow behind spark */}
+      {/* Soft glow behind the spark */}
       <circle cx="105" cy="35" r="16" fill="gold" opacity="0.55" />
 
-      {/* Spark */}
+      {/* Spark on top of the fuse */}
       <polygon
         points="105,18 112,28 125,30 112,36 105,48 98,36 85,30 98,28"
         fill="#FFD93D"
       >
-        {/* 🔥 Flicker Animation */}
+        {/* Little flicker effect to make the spark feel alive */}
         <animate
           attributeName="opacity"
           values="1;0.4;1"
@@ -47,7 +47,7 @@ export default function BombIcon({ width = 80, height = 80, blasting = false }) 
         />
       </polygon>
 
-      {/* Fuse wiggle */}
+      {/* Fuse with a subtle wiggle animation */}
       <path
         d="M95 45 C92 55, 75 55, 73 45"
         stroke="#C2B280"
@@ -62,9 +62,9 @@ export default function BombIcon({ width = 80, height = 80, blasting = false }) 
         />
       </path>
 
-      {/* Bomb Body */}
+      {/* Main bomb body */}
       <circle cx="70" cy="90" r="40" fill="url(#bombGradient)">
-        {/* 🔥 Bomb SHRINK on blast */}
+        {/* Shrinks quickly during the blast animation */}
         {blasting && (
           <animate
             attributeName="r"
@@ -84,7 +84,7 @@ export default function BombIcon({ width = 80, height = 80, blasting = false }) 
         </radialGradient>
       </defs>
 
-      {/* Skull */}
+      {/* Skull face visible only when the bomb is NOT blasting */}
       {!blasting && (
         <>
           <path

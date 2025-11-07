@@ -60,7 +60,7 @@ export default function GamePanel({ state, getTileContent, revealTile }) {
                 disabled={!state.gameActive || isRevealed}
                 className={`
                   aspect-square rounded-xl flex items-center justify-center
-                  transition-all duration-200
+                  transition-all duration-200 cursor-pointer
                   ${
                     isRevealed && isGem
                       ? "bg-[#7d40cf]"

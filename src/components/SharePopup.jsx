@@ -11,13 +11,37 @@ import {
 export default function SharePopup() {
   const [showShare, setShowShare] = useState(false)
 
+  const shareUrl = window.location.href
+  const shareMessage = `🎮 Check out this fun game! Play here: ${shareUrl}`
+
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href)
+    navigator.clipboard.writeText(shareUrl)
     alert("✅ Link copied to clipboard!")
   }
 
-  const handleComingSoon = (platform) => {
-    alert(`${platform} feature coming soon!`)
+  const handleWhatsAppShare = () => {
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`
+    window.open(whatsappUrl, "_blank")
+  }
+
+  const handleTelegramShare = () => {
+    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(
+      shareUrl
+    )}&text=${encodeURIComponent("🎮 Check out this fun game!")}`
+    window.open(telegramUrl, "_blank")
+  }
+
+  const handleInstagramShare = () => {
+    // Instagram does not support direct URL sharing like WhatsApp/Telegram
+    // You can redirect to your profile or app
+    window.open("https://www.instagram.com/", "_blank") // replace with your IG handle if you want
+  }
+
+  const handleEmailShare = () => {
+    const mailUrl = `mailto:?subject=${encodeURIComponent(
+      "Fun Game to Try!"
+    )}&body=${encodeURIComponent(shareMessage)}`
+    window.open(mailUrl)
   }
 
   return (
@@ -25,7 +49,7 @@ export default function SharePopup() {
       {/* Share button */}
       <button
         onClick={() => setShowShare(true)}
-        className="flex items-center gap-2 hover:text-white transition"
+        className="flex items-center gap-2 hover:text-white transition cursor-pointer"
       >
         <Send size={22} />
       </button>
@@ -46,35 +70,35 @@ export default function SharePopup() {
             <div className="flex flex-col gap-2">
               <button
                 onClick={handleCopyLink}
-                className="flex items-center gap-3 px-3 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-200 transition"
+                className="flex items-center gap-3 px-3 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-200 transition cursor-pointer"
               >
                 <Copy size={18} /> Copy Link
               </button>
 
               <button
-                onClick={() => handleComingSoon("WhatsApp")}
-                className="flex items-center gap-3 px-3 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-200 transition"
+                onClick={handleWhatsAppShare}
+                className="flex items-center gap-3 px-3 py-2 rounded-md bg-green-700 hover:bg-green-600 text-gray-100 transition cursor-pointer"
               >
                 <MessageCircle size={18} /> WhatsApp
               </button>
 
               <button
-                onClick={() => handleComingSoon("Telegram")}
-                className="flex items-center gap-3 px-3 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-200 transition"
+                onClick={handleTelegramShare}
+                className="flex items-center gap-3 px-3 py-2 rounded-md bg-blue-700 hover:bg-blue-600 text-gray-100 transition cursor-pointer"
               >
                 <Send size={18} /> Telegram
               </button>
 
               <button
-                onClick={() => handleComingSoon("Instagram")}
-                className="flex items-center gap-3 px-3 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-200 transition"
+                onClick={handleInstagramShare}
+                className="flex items-center gap-3 px-3 py-2 rounded-md bg-pink-700 hover:bg-pink-600 text-gray-100 transition cursor-pointer"
               >
                 <Instagram size={18} /> Instagram
               </button>
 
               <button
-                onClick={() => handleComingSoon("Mail")}
-                className="flex items-center gap-3 px-3 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-200 transition"
+                onClick={handleEmailShare}
+                className="flex items-center gap-3 px-3 py-2 rounded-md bg-gray-800 hover:bg-gray-700 text-gray-200 transition cursor-pointer"
               >
                 <Mail size={18} /> Mail
               </button>
