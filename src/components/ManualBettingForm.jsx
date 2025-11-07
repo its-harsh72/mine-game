@@ -161,13 +161,20 @@ export default function ManualBettingForm({ state,amount, setAmount, mines, setM
             </button>
 
             {/* Cash Out Button - Orange/Gold gradient */}
-            <button
-              onClick={cashOut}
-              disabled={state.potentialWinnings <= 0}
-              className="w-full bg-linear-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 disabled:opacity-50 text-black font-bold py-3 rounded-xl transition-all text-lg shadow-lg"
-            >
-              Cash out ₹{state.potentialWinnings.toFixed(0)}
-            </button>
+                        <button
+                          onClick={cashOut}
+                          disabled={state.potentialWinnings <= 0}
+                          className="w-full bg-linear-to-r from-[#ef9e3f] to-[#fbd664] hover:from-yellow-500 hover:to-yellow-600 disabled:opacity-50 text-black font-bold py-3 rounded-xl transition-all text-lg shadow-lg"
+                        >
+            Cash out 
+            <img
+              src="https://flagcdn.com/in.svg"
+              alt="India Flag"
+              width="20"
+               className="inline-block mx-2 relative -top-0.5"
+            /> 
+            ₹{state.potentialWinnings.toFixed(0)}
+                        </button>
           </>
         ) : (
           /* Bet Button - Green gradient (Only shown when game is NOT active) */
