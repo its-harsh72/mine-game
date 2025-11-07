@@ -1,6 +1,6 @@
 import gameBG from "../assets/game_BG.png";
 
-export default function GamePanel({ state, getTileContent, revealTile }) {
+export default function GamePanel({ state,  getTileContent, revealTile }) {
   return (
     <div
       className="bg-cover bg-center flex flex-col"
